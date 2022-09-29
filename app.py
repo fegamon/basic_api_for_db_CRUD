@@ -22,7 +22,7 @@ List, add, update and delete users from database.
 
 **Developed by Freddy Granda & Ariel Torres.**
 
-[GitHub Repository](https://github.com/fegamon/students_api)
+[GitHub Repository](https://github.com/fegamon/student_db_api.git)
 """
 
 app = FastAPI(
