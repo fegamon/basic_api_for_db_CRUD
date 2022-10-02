@@ -1,37 +1,38 @@
 from turtle import colormode
 from fastapi import FastAPI
-from routes.routes import api_students
+from routes.routes import routes
+from fastapi.middleware.cors import CORSMiddleware
 
 description = """
-# Student API to MySql CRUD. 🚀
+## Description
 
-## Usage
-
-List, add, update and delete users from database.
+Python API to Create, Read, Update and Delete (CRUD) registries into a given database.
 
 ## Options
 
 |**Method**|**Route**|**Description**|
 |----------|---------|---------------|
-|**GET**|/students|Show a json object with all stored students from database|
-|**POST**|/students|Send a json objetc to add a new student to database ("id" is optional)|
-|**GET**|/students/{value}|Search for a student in database. Into "value" insert a "cedula" or "apellido" key|
-|**PUT**|/students/{id}|Update the values of a student stored in database|
-|**DELETE**|/students/{id}|Search a student by "id" and deletes it from database|
+|**GET**|/users|Show a json object with all stored users from database|
+|**GET**|/users/{value}|Search for a user in database. Into "value" insert a "cedula" or "apellido" key|
+|**POST**|/users|Send a json objetc to add a new registry to database ("id" is optional)|
+|**PUT**|/users/{id}|Update the values of a user stored in database|
+|**DELETE**|/users/{id}|Search a user by "id" and deletes it from database|
 |**DELETE**|/delete_table|Drop the current table from the database|
 
-**Developed by Freddy Granda & Ariel Torres.**
-
-[![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/fegamon/student_db_api.git)
+[![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/fegamon)
 """
 
 app = FastAPI(
-    title="Student's API",
+    title="Fast API - SQL CRUD",
     description=description,
-    version='0.0.1',
-    openapi_tags=[{
-        'name': 'Students',
-        'description': "API for student's CRUD in MySql"
-    }]
+    version='0.1'
 )
-app.include_router(api_students)
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=['*'],
+    allow_credentials=True,
+    allow_methods=['*'],
+    allow_headers=['*']
+)
+app.include_router(routes)

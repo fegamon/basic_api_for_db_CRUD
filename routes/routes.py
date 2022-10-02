@@ -1,83 +1,85 @@
 import email
 from fastapi import APIRouter
 from config.db import connection, engine
-from models.table_students import students
-from schemas.student_schema import studentSchema
+from models.table import table
+from schemas.table_schema import tableSchema
 from sqlalchemy import or_
 from starlette.status import HTTP_200_OK
 
-api_students = APIRouter()
+routes = APIRouter()
 
-# show students list
-@api_students.get('/students', response_model=list[studentSchema], tags=['Students'], 
-                    description='List all students from database.')
-def list_all_students():
+# show table list
+@routes.get('/users', response_model=list[tableSchema], tags=['CRUD'], 
+                    description='List all data from table.')
+def list_all_data():
     try:
-        return connection.execute(students.select()).fetchall()
+        return connection.execute(table.select()).fetchall()
 
     except Exception as error:
         return error
 
-# add a new student
-@api_students.post('/students', tags=['Students'], description='Add a new student to database')
-def add_student(studentSchema: studentSchema):
+# add a new registry
+@routes.post('/users', tags=['CRUD'], description='Add a new registry to table')
+def add_registry(tableSchema: tableSchema):
     try:
-        new_student = {'id': studentSchema.id,
-                    'nombre': studentSchema.nombre,
-                    'apellido': studentSchema.apellido,
-                    'edad': studentSchema.edad,
-                    'cedula': studentSchema.cedula,
-                    'email': studentSchema.email,
-                    'genero': studentSchema.genero}
+        new_registry = {'id': tableSchema.id,
+                    'name': tableSchema.name,
+                    'last_name': tableSchema.last_name,
+                    'age': tableSchema.age,
+                    'phone': tableSchema.phone,
+                    'email': tableSchema.email}
 
-        result = connection.execute(students.insert().values(new_student))
+        result = connection.execute(table.insert().values(new_registry))
         return HTTP_200_OK
 
     except Exception as error:
         return error
 
-# get a student by 'cedula' or 'apellido'
-@api_students.get('/students/{value}', response_model=studentSchema, tags=['Students'], 
-                    description='Get a student from "cedula" or "apellido" key.')
-def get_students(value: str):
+# get a registry by id
+@routes.get('/users/{id}', response_model=tableSchema, tags=['CRUD'], 
+                    description='Get a registry by id.')
+def get_registry(id: str):
     try:
-        result = connection.execute(students.select().where(or_(
-            students.c.cedula == value, students.c.apellido == value
-        ))).first()
+        result = connection.execute(table.select().where(
+            table.c.id == id
+        )).first()
         return result
         
     except Exception as error:
         return error
 
-# delete a student from a given id
-@api_students.delete('/students/{id}', tags=['Students'], description='Delete a student from database.')
-def delete_student(id: str):
+# delete a registry by id
+@routes.delete('/users/{id}', tags=['CRUD'], description='Delete a registry by id.')
+def delete_registry(id: str):
     try:
-        result = connection.execute(students.delete().where(students.c.id == id))
+        result = connection.execute(table.delete().where(table.c.id == id))
         return HTTP_200_OK
 
     except Exception as error:
         return error
 
-# update studen't values
-@api_students.put('/students/{id}', response_model=studentSchema, tags=['Students'], 
-                    description='Update valures of a specific student.')
-def update_student(id: str, studentSchema: studentSchema):
+# update registry't values
+@routes.put('/users/{id}', response_model=tableSchema, tags=['CRUD'], 
+                    description='Update registry of a specific by id.')
+def update_registry(id: str, tableSchema: tableSchema):
     try:
-        connection.execute(students.update().values(nombre=studentSchema.nombre,
-                        apellido=studentSchema.apellido, edad=studentSchema.edad,
-                        cedula=studentSchema.cedula, email=studentSchema.email,
-                        genero=studentSchema.genero).where(students.c.id == id))
-        return connection.execute(students.select().where(students.c.id == id)).first()
+        connection.execute(table.update().values(
+            name=tableSchema.name,
+            last_name=tableSchema.last_name, 
+            age=tableSchema.age,
+            phone=tableSchema.phone, 
+            email=tableSchema.email
+            ).where(table.c.id == id))
+        return connection.execute(table.select().where(table.c.id == id)).first()
 
     except Exception as error:
         return error
 
 # drop current database
-@api_students.delete('/delete_table', tags=['Students'], description='Drop current database.')
+@routes.delete('/delete_table', tags=['Table'], description='Drop current database.')
 def delete_table():
     try:
-        connection.execute(students.drop(engine))
+        connection.execute(table.drop(engine))
         return HTTP_200_OK
     except Exception as err:
         return err
