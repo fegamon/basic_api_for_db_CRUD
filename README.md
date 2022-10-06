@@ -58,7 +58,7 @@ python-dotenv==0.21.0
 Run the command: ```pip install -r requeriments.txt``` to install all dependencies.
 
 ### Set .env
-Go into .env file and changue the values of the DB credentials to your DB credentials:
+Go into .env file and change the values of the DB credentials to your DB credentials:
 
 ```
 #DB credentials
@@ -74,14 +74,14 @@ Make sure you have activated the virtual enviroment and then into app folder run
 
 - ```uvicorn app:app --reload```
 
-Where ```--reload```  is to auto load the server time to you save a new changue in any file.
+Where ```--reload```  is for auto load the server every time you save a new change in any file.
 
 ## FastAPI Panel - Make CRUD to database
 
-Go to```http://localhost:8000/docs```in your browser. You'll can see the FastAPI panel Where you'll can make calls to the different methods to make CRUD to darabase.
+Go to```http://localhost:8000/docs```in your browser. You'll can see the FastAPI panel Where you'll can make calls to the different methods to make CRUD to the table.
 
 ![FastAPI panel](img/fastapi_panel.png)
 
 ### Important
 - If you call to method to drop the table, you'll have to restart the server to create a new table again.
-- **id** key into the json objects, is not needed to insert, because it is autoincrementals.
+- **id** key into the json objects, is not needed to insert, because it is autoincremental.
