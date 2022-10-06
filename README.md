@@ -23,7 +23,7 @@ You can use pip to install **virtualenv**:
 
 - ```pip install virtualenv```
 
-Then, create a folder when the program and the virtual enviroment will be installed.
+Then, create a folder where the program and the virtual enviroment will be installed.
 Inside the folder, first, clone this API's repository and then create the virtual env:
 
 - ```virtualenv 'your_proyect_name'```
