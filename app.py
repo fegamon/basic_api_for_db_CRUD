@@ -1,5 +1,6 @@
 from turtle import colormode
 from fastapi import FastAPI
+import uvicorn
 from routes.routes import routes
 from fastapi.middleware.cors import CORSMiddleware
 
