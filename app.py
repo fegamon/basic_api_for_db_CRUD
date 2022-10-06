@@ -14,7 +14,7 @@ Python API to Create, Read, Update and Delete (CRUD) registries into a given dat
 |**Method**|**Route**|**Description**|
 |----------|---------|---------------|
 |**GET**|/users|Show a json object with all stored users from database|
-|**GET**|/users/{value}|Search for a user in database. Into "value" insert a "cedula" or "apellido" key|
+|**GET**|/users/{id}|Get user by "id".|
 |**POST**|/users|Send a json objetc to add a new registry to database ("id" is optional)|
 |**PUT**|/users/{id}|Update the values of a user stored in database|
 |**DELETE**|/users/{id}|Search a user by "id" and deletes it from database|
