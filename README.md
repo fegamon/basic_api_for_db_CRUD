@@ -9,7 +9,7 @@ Python API to Create, Read, Update and Delete (CRUD) registries into a given dat
 |**Method**|**Route**|**Description**|
 |----------|---------|---------------|
 |**GET**|/users|Show a json object with all stored users from database|
-|**GET**|/users/{value}|Search for a user in database. Into "value" insert a "cedula" or "apellido" key|
+|**GET**|/users/{id}|Get user by "id".|
 |**POST**|/users|Send a json objetc to add a new registry to database ("id" is optional)|
 |**PUT**|/users/{id}|Update the values of a user stored in database|
 |**DELETE**|/users/{id}|Search a user by "id" and deletes it from database|
@@ -36,19 +36,19 @@ Congratulations! Now, you have a isolated enviroment to run the API. Now let's i
 Go into the API folder. You can find a file named **requeriments.txt** will all needed dependencies to run the app:
 
 ```
-anyio==3.6.1  
-click==8.1.3      
-colorama==0.4.5   
-fastapi==0.85.0   
-greenlet==1.1.3   
-h11==0.13.0       
+anyio==3.6.1
+click==8.1.3
+colorama==0.4.5
+fastapi==0.85.0
+greenlet==1.1.3
+h11==0.13.0
 idna==3.4
 pycodestyle==2.9.1
-pydantic==1.10.2  
-PyMySQL==1.0.2    
-sniffio==1.3.0    
+pydantic==1.10.2
+PyMySQL==1.0.2
+sniffio==1.3.0
 SQLAlchemy==1.4.41
-starlette==0.20.4 
+starlette==0.20.4
 toml==0.10.2
 typing_extensions==4.3.0
 uvicorn==0.18.3
