@@ -80,6 +80,8 @@ Where ```--reload```  is to auto load the server time to you save a new changue 
 
 Go to```http://localhost:8000/docs```in your browser. You'll can see the FastAPI panel Where you'll can make calls to the different methods to make CRUD to darabase.
 
+![FastAPI panel](img/fastapi_panel.png)
+
 ### Important
 - If you call to method to drop the table, you'll have to restart the server to create a new table again.
 - **id** key into the json objects, is not needed to insert, because it is autoincrementals.
