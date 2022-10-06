@@ -85,8 +85,3 @@ Go to```http://localhost:8000/docs```in your browser. You'll can see the FastAPI
 ### Important
 - If you call to method to drop the table, you'll have to restart the server to create a new table again.
 - **id** key into the json objects, is not needed to insert, because it is autoincrementals.
-
-
-
-
-
